@@ -26,16 +26,17 @@ function App() {
   };
 
   return (
-    <div className="container d-flex justify-content-center mt-5">
-      <div className="card" style={{ width: '25rem' }}>
+    <div className="container d-flex justify-content-center">
+      <div className="card" style={{ width: '40rem', marginTop: '10rem'}}>
         <div className="card-body">
 
           <div className="container d-flex justify-content-center">
-            <h1 className='card-title my-5'>To Do List</h1>
+            <h1 className='card-title my-4'>To Do List</h1>
           </div>
 
           <div className="container d-flex justify-content-center mb-3">
             <input
+              className="form-control form-control-lg"
               type="text"
               placeholder="Escribe una tarea y presiona Enter"
               value={inputValue}
@@ -45,17 +46,24 @@ function App() {
           </div>
 
           <div className="container d-flex justify-content-center">
-            <ul className='list-group'>
-              {tasksList.map((task) => (
+            <ul className='list-group' style={{ width: "100%" }}>
+              <p>{tasksList.length} tareas pendientes</p>
+              {tasksList.length === 0 ?
                 <li
-                  className='d-flex justify-content-between list-group-item p-3 '
-                  key={task.id}
-                >
-                  {task.task}
-                  <button onClick={() => deleteTask(task.id)}>Eliminar</button>
-                </li>
-              ))}
+                  className='d-flex justify-content-between list-group-item p-3 list-items'
+                >No hay tareas pendientes</li>
+                
+                :
 
+                tasksList.map((task) => (
+                  <li
+                    className='d-flex justify-content-between list-group-item p-3 list-items'
+                    key={task.id}
+                  >
+                    {task.task}
+                    <button type="button" className="btn-close delete-button" onClick={() => deleteTask(task.id)}></button>
+                  </li>
+                ))}
             </ul>
           </div>
         </div>
